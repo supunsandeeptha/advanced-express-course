@@ -1,0 +1,16 @@
+{
+  "name": "building-website-with-nodejs",
+  "version": "1.0.0",
+  "description": "LinkedIn course - building website with Nodejs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Supun Sandeeptha",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
