@@ -1,21 +1,35 @@
-const express = require('express');
+const express = require("express");
 // load static content
-const path = require('path');
+const path = require("path");
+//service classes
+const feedbackService = require("./services/FeedbackService");
+const speakersService = require("./services/SpeakerService");
 
-const route = require('./routes/routes.js');
+// new instance of the classes
+const feedbackservice = new feedbackService("./data/feedback.json");
+const speakersservice = new speakersService("./data/speakers.json");
+
+const route = require("./routes/routes.js");
 
 const app = express();
 const port = 3000;
 // ejs template engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
 
 // using the static middleware to link the css styles and images
-app.use(express.static(path.join(__dirname, './static')));
+app.use(express.static(path.join(__dirname, "./static")));
 // serving index.html using path module
 
 // using the route middleware
-app.use('/', route());
+// parsing the services to the routes
+app.use(
+  "/",
+  route({
+    feedbackservice,
+    speakersservice,
+  })
+);
 
 app.listen(3000, (err) => {
   if (err) {
